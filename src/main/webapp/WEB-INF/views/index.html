@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <style>
+        form
+        {
+            float:left;
+        }
+        input {
+            float:left
+        }
+    </style>
+</head>
+<body>
+<h2>Employees</h2>
+<br>
+<table>
+    <tr>
+        <th>Id  </th>
+        <th>Name  </th>
+        <th>Surname  </th>
+        <th>Department  </th>
+        <th>Salary  </th>
+        <th>Operations  </th>
+    </tr>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.getId() + ' '}">ID</td>
+        <td th:text="${employee.getName() + ' '}">Name</td>
+        <td th:text="${employee.getSurname() + ' '}">Surname</td>
+        <td th:text="${employee.getDepartment() + ' '}">Department</td>
+        <td th:text="${employee.getSalary() + ' '}">Salary</td>
+        <td>
+            <input type="button" th:onclick="'window.location.href = \'' + @{/employees/{id}/edit(id=${employee.getId()})} + '\''" value="Edit">
+            <form th:method="DELETE" th:action="@{/employees/{id}(id=${employee.getId()})}">
+                <button value="Delete">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<form th:method="GET" action="/employees/new">
+    <input type="submit" value="Create">
+</form>
+</body>
+</html>

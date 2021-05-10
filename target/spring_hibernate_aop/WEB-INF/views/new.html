@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New</title>
+</head>
+<body>
+<h2>Employee Form</h2>
+<br>
+<form th:method="POST" th:action="@{/employees}" th:object="${employee}">
+    <input type="hidden" th:field="*{id}">
+    Name <input type="text" th:field="*{name}">
+    <div th:if="${#fields.hasErrors()}" th:errors="*{name}" style="color:red">Name error</div>
+    <br><br>
+    Surname <input type="text" th:field="*{surname}">
+    <div th:if="${#fields.hasErrors()}" th:errors="*{surname}" style="color:red">Surname error</div>
+    <br><br>
+    Department <input type="text" th:field="*{department}">
+    <div th:if="${#fields.hasErrors()}" th:errors="*{department}" style="color:red">Department error</div>
+    <br><br>
+    Salary <input type="text" th:field="*{salary}">
+    <div th:if="${#fields.hasErrors()}" th:errors="*{salary}" style="color:red">Salary error</div>
+    <br><br>
+    <input th:if="${employee.getId()} == 0" type="submit" value="Create">
+    <input th:if="${employee.getId()} != 0" type="submit" value="Update">
+</form>
+</body>
+</html>
